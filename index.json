@@ -1,6 +1,5 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-04T12:49:40.954Z",
   "template_count": 69,
   "templates": [
     {
@@ -186,7 +185,7 @@
       "scheme": "dark",
       "best_for": "Anything that should land like a broadside newspaper headline: brand manifestos, magazine and cultural pitches, design talks, bilingual EN/CN decks, founder vision statements. Also a striking pick for tech, research, or business decks that want a dramatic single-accent editorial feel.",
       "avoid_for": "Decks that need to feel quiet, warm, or institutionally traditional — the dark canvas with fire-orange accent commits to drama.",
-      "slide_count": 20
+      "slide_count": 16
     },
     {
       "slug": "capsule",
@@ -598,7 +597,7 @@
       "scheme": "light",
       "best_for": "Anything that should feel like a hand-typeset ledger: user research synthesis, white papers, longform reports, academic and policy briefs, advisory deliverables, bilingual EN/CN reports. Equally good for tech, design, or brand decks that want their words to be the only thing on the page.",
       "avoid_for": "Decks that need visual personality or color-led storytelling — the all-ink palette is intentionally austere.",
-      "slide_count": 18
+      "slide_count": 16
     },
     {
       "slug": "neo-grid-bold",
@@ -629,7 +628,7 @@
       "scheme": "light",
       "best_for": "Anything that should feel confident and editorial-graphic: design-led pitches, brand work, founder talks, conference keynotes. Excellent for stat-heavy slides, comparisons, and process flows. Just as strong for tech, research, or finance when the speaker wants to read as design-led rather than corporate.",
       "avoid_for": "Contexts that need to feel quiet, traditional, or warm — the neon-yellow accent and uppercase display commit to a confident editorial voice.",
-      "slide_count": 13
+      "slide_count": 12
     },
     {
       "slug": "peoples-platform",
@@ -948,7 +947,7 @@
       "scheme": "dark",
       "best_for": "Anything that should land like a broadside newspaper headline: brand manifestos, magazine and cultural pitches, design talks, bilingual EN/CN decks, founder vision statements. Also a striking pick for tech, research, or business decks that want a dramatic single-accent editorial feel.",
       "avoid_for": "Decks that need to feel quiet, warm, or institutionally traditional — the dark canvas with fire-orange accent commits to drama.",
-      "slide_count": 20
+      "slide_count": 16
     },
     {
       "slug": "quaero-capsule",
@@ -1314,7 +1313,7 @@
       "scheme": "light",
       "best_for": "Anything that should feel corporate-technical and trustworthy: instrument and device reviews, engineering presentations, internal technical reports, project demos, bilingual EN/CN technical decks. Also a solid choice for any B2B, medical-device, or lab-equipment context where the deck should read as institutional and precise.",
       "avoid_for": "Contexts that need warmth, playfulness, or editorial flair — the teal-navy palette and institutional footer commit to a corporate-technical voice.",
-      "slide_count": 10
+      "slide_count": 12
     },
     {
       "slug": "quaero-long-table",
@@ -1420,7 +1419,7 @@
       "scheme": "light",
       "best_for": "Anything that should feel like a hand-typeset ledger: user research synthesis, white papers, longform reports, academic and policy briefs, advisory deliverables, bilingual EN/CN reports. Equally good for tech, design, or brand decks that want their words to be the only thing on the page.",
       "avoid_for": "Decks that need visual personality or color-led storytelling — the all-ink palette is intentionally austere.",
-      "slide_count": 18
+      "slide_count": 16
     },
     {
       "slug": "quaero-neo-grid-bold",
@@ -1453,7 +1452,7 @@
       "scheme": "light",
       "best_for": "Anything that should feel confident and editorial-graphic: design-led pitches, brand work, founder talks, conference keynotes. Excellent for stat-heavy slides, comparisons, and process flows. Just as strong for tech, research, or finance when the speaker wants to read as design-led rather than corporate.",
       "avoid_for": "Contexts that need to feel quiet, traditional, or warm — the neon-yellow accent and uppercase display commit to a confident editorial voice.",
-      "slide_count": 13
+      "slide_count": 12
     },
     {
       "slug": "quaero-peoples-platform",

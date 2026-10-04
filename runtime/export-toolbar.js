@@ -5,13 +5,13 @@
  * export button appears in the bottom-right corner.
  *
  * Capabilities:
- *   1. Copy for WeChat MP — inlines all CSS with juice-like logic so
- *      styles survive the WeChat editor paste.
+ *   1. Copy for WeChat MP — inlines all CSS with juice-like logic for
+ *      pasting into an editor. Verify the pasted result.
  *   2. Download .html — self-contained single file.
  *   3. Download .png — captures current slide as a 2x retina PNG.
  *   4. Copy as image — puts a PNG on the clipboard for X / XHS / Weibo.
  *
- * Zero dependencies. Works in any modern browser (Chrome 90+, Safari 15+, Firefox 100+).
+ * Zero dependencies. Resource bundling requires localhost or HTTPS. Browser support must be verified.
  */
 
 (function () {
@@ -24,8 +24,8 @@
 
   function inlineStyles(rootEl) {
     const clone = rootEl.cloneNode(true);
-    const origEls = rootEl.querySelectorAll('*');
-    const cloneEls = clone.querySelectorAll('*');
+    const origEls = [rootEl, ...rootEl.querySelectorAll('*')];
+    const cloneEls = [clone, ...clone.querySelectorAll('*')];
 
     for (let i = 0; i < origEls.length; i++) {
       const computed = window.getComputedStyle(origEls[i]);
@@ -71,7 +71,7 @@
 
     for (const slide of slides) {
       const inlined = inlineStyles(slide);
-      inlined.style.cssText += 'position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;margin-bottom:16px;page-break-after:always;';
+      inlined.style.cssText += 'position:relative;display:block;visibility:visible;opacity:1;transform:none;width:100%;aspect-ratio:16/9;overflow:hidden;margin-bottom:16px;page-break-after:always;';
       inlined.removeAttribute('class');
       wrapper.appendChild(inlined);
     }

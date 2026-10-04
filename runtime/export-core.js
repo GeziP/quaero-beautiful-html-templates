@@ -2,7 +2,10 @@
 (function () {
   'use strict';
   const cache = new Map();
-  function slides() { return Array.from(document.querySelectorAll('section.slide, div.slide')); }
+  function slides() {
+    const stage = document.querySelector('deck-stage');
+    return stage ? Array.from(stage.children).filter(el => el.matches('section, .slide')) : Array.from(document.querySelectorAll('section.slide, div.slide'));
+  }
   function currentSlide() {
     const all = slides();
     const stage = document.querySelector('deck-stage');
@@ -114,17 +117,34 @@
     const copy = element.cloneNode(true);
     const originals = [element, ...element.querySelectorAll('*')];
     const copies = [copy, ...copy.querySelectorAll('*')];
+    const pseudoRules = [];
+    const prefix = 'qe-' + Math.random().toString(36).slice(2);
     await Promise.all(originals.map(async (original, i) => {
       const computed = getComputedStyle(original);
       let css = '';
       for (const name of computed) css += `${name}:${computed.getPropertyValue(name)};`;
       copies[i].setAttribute('style', await bundleCss(css, document.baseURI));
+      copies[i].setAttribute('data-export-node', `${prefix}-${i}`);
+      for (const pseudo of ['::before', '::after']) {
+        const computedPseudo = getComputedStyle(original, pseudo);
+        if (computedPseudo.content === 'none' || computedPseudo.content === 'normal') continue;
+        let pseudoCss = '';
+        for (const name of computedPseudo) pseudoCss += `${name}:${computedPseudo.getPropertyValue(name)};`;
+        pseudoRules.push(`[data-export-node="${prefix}-${i}"]${pseudo}{${await bundleCss(pseudoCss, document.baseURI)}}`);
+      }
       if (copies[i].tagName === 'IMG' && original.currentSrc) {
         copies[i].src = await resource(original.currentSrc);
         copies[i].removeAttribute('srcset');
       }
     }));
+    for (const property of ['inset','inset-block','inset-inline','inset-block-start','inset-block-end','inset-inline-start','inset-inline-end','top','right','bottom','left']) copy.style.removeProperty(property);
     copy.style.cssText += ';transform:none;margin:0;position:relative;left:0;top:0;opacity:1;visibility:visible;';
+    copy.style.overflow = 'hidden';
+    if (pseudoRules.length) {
+      const style = document.createElement('style');
+      style.textContent = pseudoRules.join('\n');
+      copy.append(style);
+    }
     return copy;
   }
   async function captureSlide(element, scale = 2) {

@@ -1,0 +1,17 @@
+{
+  "name": "quaero-beautiful-html-templates",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-quaero-variants.mjs && node scripts/inject-export-toolbar.mjs && node scripts/build-index.mjs && node scripts/export-skills.mjs",
+    "test": "node --test",
+    "verify": "node scripts/verify-library.mjs",
+    "verify:browser": "node scripts/verify-browser.mjs",
+    "verify:repro": "node scripts/verify-reproducibility.mjs",
+    "verify:online": "node scripts/verify-online-export.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "yaml": "2.9.1"
+  }
+}

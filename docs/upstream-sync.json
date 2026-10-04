@@ -1,0 +1,10 @@
+{
+  "repository": "zarazhangrui/beautiful-html-templates",
+  "commit": "e5e204fb1f3b06290846e7dcd7aceddabeceec8c",
+  "fork_base": "d07169cc4a505193c35a3a526e12d2a8536839a1",
+  "synced_on": "2026-10-04",
+  "strategy": "Selective source sync, followed by Quaero variant regeneration",
+  "included": ["base templates", "design specifications including CJK guidance", "gallery screenshots", "new-template scaffold"],
+  "preserved": ["Quaero chrome", "Institutional template", "export runtime", "skill generator", "Chinese README"],
+  "excluded": ["reverted fixed-stage specifications", "deleted personal reference files"]
+}

@@ -56,6 +56,14 @@
 
   function applySafeAreaToSlides(slides) {
     const insets = computeSafeInsets();
+    const stage = document.querySelector("deck-stage");
+    const reference = stage && (stage.querySelector("[data-deck-active]") || slides[0]);
+    const rect = reference ? reference.getBoundingClientRect() : null;
+    const scale = rect && reference.offsetHeight ? rect.height / reference.offsetHeight : 1;
+    // deck-stage renders a native canvas under a viewport scale. Chrome is in
+    // viewport pixels, while slide padding is in native canvas pixels.
+    const topInset = rect ? Math.max(0, insets.topInset - rect.top) / (scale || 1) : insets.topInset;
+    const bottomInset = rect ? Math.max(0, insets.bottomInset - (window.innerHeight - rect.bottom)) / (scale || 1) : insets.bottomInset;
     slides.forEach(function (slide) {
       if (!(slide instanceof HTMLElement)) return;
       if (slide.dataset.quaeroSafeApplied !== "1") {
@@ -67,8 +75,8 @@
       const basePt = Number(slide.dataset.quaeroBasePt || 0);
       const basePb = Number(slide.dataset.quaeroBasePb || 0);
       slide.style.boxSizing = "border-box";
-      slide.style.paddingTop = `${basePt + insets.topInset}px`;
-      slide.style.paddingBottom = `${basePb + insets.bottomInset}px`;
+      slide.style.paddingTop = `${basePt + topInset}px`;
+      slide.style.paddingBottom = `${basePb + bottomInset}px`;
     });
   }
 
@@ -176,6 +184,7 @@
       return s.classList && s.classList.contains("active");
     });
     if (byActive) return byActive;
+    if (window.QuaeroExport) return window.QuaeroExport.currentSlide();
     return slides[0] || null;
   }
 
@@ -261,6 +270,7 @@
   });
 
   document.addEventListener("click", scheduleSync);
+  document.addEventListener("scroll", scheduleSync, true);
   window.addEventListener("resize", function () {
     hideDeckStageOverlays();
     scheduleSync();

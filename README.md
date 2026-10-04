@@ -2,7 +2,7 @@
 
 为 AI 驱动的演示文稿生成而设计的精美 HTML 模板库。
 
-30+ 生产级 HTML 幻灯片模板，内置 Quaero institutional chrome — 让任何 AI agent 都能自动选择合适的模板，生成漂亮的演示文稿。
+69 套 HTML 幻灯片模板（34 套基础模板、34 套 Quaero 变体和 1 套 Institutional），内置 Quaero institutional chrome — 让任何 AI agent 都能自动选择合适的模板，生成漂亮的演示文稿。
 
 ## 快速开始
 
@@ -16,7 +16,7 @@ Clone https://github.com/GeziP/quaero-beautiful-html-templates and follow the in
 
 ## Quaero Chrome
 
-每个模板都包含 Quaero institutional chrome — 一套统一的顶栏和底栏，会根据幻灯片背景自动调整明暗：
+`quaero-*` 模板包含 Quaero institutional chrome — 一套统一的顶栏和底栏，会根据幻灯片背景自动调整明暗：
 
 - 顶栏显示当前幻灯片标题和页码
 - 底栏显示 Quaero logo 和保密声明
@@ -30,6 +30,7 @@ Clone https://github.com/GeziP/quaero-beautiful-html-templates and follow the in
 templates/<template-slug>/
   template.html      # 独立的 HTML 幻灯片
   template.json      # 元数据：风格、配色、适用场景
+  design.md          # 设计系统、布局规则、中文字体适配
   styles.css         # （可选）外部样式
   deck-stage.js      # （可选）自定义幻灯片引擎
 ```
@@ -38,7 +39,7 @@ templates/<template-slug>/
 
 ## 模板展示
 
-32 个模板，每个展示 3 张幻灯片（封面 · 中间 · 后段），帮助你快速了解每个视觉系统的布局能力。点击模板名称可打开对应文件夹。
+34 个基础模板，每个展示 3 张幻灯片（封面 · 中间 · 后段），帮助你快速了解每个视觉系统的布局能力。点击模板名称可打开对应文件夹。
 
 ### [Soft Editorial](./templates/soft-editorial/)
 
@@ -360,13 +361,25 @@ templates/<template-slug>/
 
 > Warm cream and rust-red supper-club aesthetic with bold uppercase grotesk headlines, italic Fraunces, and pill-shaped outlined buttons.
 
+### [Editorial Forest](./templates/editorial-forest/)
+
+<img src="./screenshots/editorial-forest-1.png" width="32.5%" alt="Editorial Forest" /> <img src="./screenshots/editorial-forest-2.png" width="32.5%" alt="Editorial Forest" /> <img src="./screenshots/editorial-forest-5.png" width="32.5%" alt="Editorial Forest" />
+
+> Forest green, dusty pink, and cream with Source Serif 4.
+
+### [Emerald Editorial](./templates/emerald-editorial/)
+
+<img src="./screenshots/emerald-editorial-1.png" width="32.5%" alt="Emerald Editorial" /> <img src="./screenshots/emerald-editorial-3.png" width="32.5%" alt="Emerald Editorial" /> <img src="./screenshots/emerald-editorial-6.png" width="32.5%" alt="Emerald Editorial" />
+
+> Emerald, cream, and warm editorial typography.
+
 ## Export Toolbar
 
 每个模板内置了一键导出工具栏（右下角悬浮按钮），支持：
 
 | 按钮 | 功能 | 适用平台 |
 |---|---|---|
-| **WeChat** | CSS 内联后复制 HTML，粘贴到公众号编辑器零格式丢失 | 微信公众号 |
+| **WeChat** | 复制内联样式 HTML；需在公众号编辑器检查布局与图片 | 微信公众号 |
 | **Copy IMG** | 当前幻灯片截图为 2x PNG 并复制到剪贴板 | X / 小红书 / 微博 |
 | **PNG** | 下载当前幻灯片为高清 PNG 文件 | 任何平台 |
 | **HTML** | 下载完整 deck 为独立 .html 文件 | 离线分享 |
@@ -382,11 +395,11 @@ node scripts/inject-export-toolbar.mjs --remove   # 从所有模板移除
 
 ## html-anything 集成
 
-本库的 65 套模板可以导出为 [html-anything](https://github.com/nexu-io/html-anything) 兼容的 SKILL.md 格式，让 Claude Code、Cursor、Codex 等 8 种 AI 编码 CLI 直接使用我们的设计系统。
+本库的 69 套模板可以导出为 [html-anything](https://github.com/nexu-io/html-anything) 兼容的 SKILL.md 格式，让 Claude Code、Cursor、Codex 等 8 种 AI 编码 CLI 直接使用我们的设计系统。
 
 ```bash
 node scripts/export-skills.mjs
-# → dist/skills/ 目录下生成 65 个 skill 文件夹
+# → dist/skills/ 目录下生成 69 个 skill 文件夹
 ```
 
 每个 skill 文件夹包含：
@@ -395,40 +408,51 @@ node scripts/export-skills.mjs
 dist/skills/deck-<slug>/
   SKILL.md        # 提示词 + 前置元数据
   example.html    # 我们的 template.html
-  assets/         # deck-stage.js, styles.css, chrome 资源
+  assets/         # 按原目录关系打包的本地依赖
+  references/     # design.md、中文内容、品牌规范、验收说明
+  manifest.json   # 打包依赖清单
 ```
 
 将 `dist/skills/` 下的文件夹复制到 html-anything 的 `src/lib/templates/skills/` 即可在其 picker 中显示。
 
-## Agent Memory
+## 构建与自验证
 
-本项目集成了 [agentmemory](https://github.com/rohitg00/agentmemory)，让 Claude Code、Cursor、Codex CLI 等 AI 编码 agent 共享持久化记忆。
-
-```bash
-# 启动 memory server（单独终端）
-npx @agentmemory/agentmemory
+```sh
+npm ci
+npm run build
+npm test
+npm run verify
+npm run verify:repro
+npx playwright install chromium
+npm run verify:browser
 ```
 
-各 agent 的配置已预置：
+Windows 已安装 Edge 时，可在 PowerShell 中设置 `$env:BROWSER_CHANNEL='msedge'`。
+浏览器测试把全部 Skill 包复制到仓库外，再检查本地资源、脚本、翻页和品牌页码。
+导出测试覆盖离线 HTML、PNG 像素与伪元素、实际下载、缺失资源和剪贴板权限失败。
+检查结果与截图写入 `artifacts/`。GitHub Actions 会保存这些文件供复核。
 
-| Agent | 配置文件 | 状态 |
-|---|---|---|
-| **Claude Code** | `.mcp.json`（项目级） | 已配置 |
-| **Cursor** | `~/.cursor/mcp.json` | 已配置 |
-| **Codex CLI** | `~/.codex/config.toml` | 已配置 |
+基础模板是源文件，Quaero 变体由脚本重新生成。Institutional 单独维护。
+连续构建应生成相同文件。修改页数时，同时更新 `template.json`。
+设计规则的英文指令采用短句和明确条件，演示文案保留用户需要的语气。
 
-Claude Code 用户还可以通过 plugin 系统获得完整集成（12 hooks + 4 skills + 51 MCP tools）：
+HTML 导出会打包脚本、样式、图片和样式引用的字体。资源必须允许浏览器获取。
+建议通过 localhost 打开模板，例如在项目根目录运行 `python -m http.server 8000`。
+缺失资源或 CORS 限制会使导出失败，不会把残缺文件宣称为独立文件。
+剪贴板功能依赖安全上下文和浏览器权限。微信公众号编辑器兼容性需手动验证。
+默认自动浏览器检查不访问外部字体。可另外运行 `npm run verify:online`，检查真实模板的线上字体、离线回放及 PNG。Safari 兼容性仍需单独验证。独立 HTML 内嵌字体后可能较大，本次样例约 23 MB。
 
+## 新增模板
+
+```sh
+node scripts/new-template.mjs my-template
 ```
-/plugin marketplace add rohitg00/agentmemory
-/plugin install agentmemory
-```
 
-实时查看器：`http://localhost:3113`
+补齐 `template.html`、`template.json` 和 `design.md` 后，运行构建与验收命令。
 
 ## 工作流程
 
-1. Agent 询问用户演示场景和期望风格
+1. Agent 使用用户已提供的场景和风格，仅询问缺失的关键资料
 2. Agent 读取 `index.json`，匹配 3 个候选模板
 3. Agent 为每个候选模板生成封面预览
 4. Agent 克隆用户选择的模板并替换内容

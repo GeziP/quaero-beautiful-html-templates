@@ -193,6 +193,7 @@ function patchTemplateJson(srcDir, destDir, baseSlug) {
 }
 
 function main() {
+  let errors = 0;
   const names = readdirSync(TEMPLATES_DIR).filter((n) => {
     const p = join(TEMPLATES_DIR, n);
     if (!isDir(p)) return false;
@@ -223,6 +224,7 @@ function main() {
       html = injectIntoHtml(html, override, slug);
     } catch (e) {
       console.error(`FAIL ${slug}:`, e.message);
+      errors++;
       rmSync(dest, { recursive: true, force: true });
       continue;
     }
@@ -231,6 +233,7 @@ function main() {
     patchTemplateJson(src, dest, slug);
     console.log("built", `quaero-${slug}`);
   }
+  if (errors) process.exitCode = 1;
 }
 
 main();

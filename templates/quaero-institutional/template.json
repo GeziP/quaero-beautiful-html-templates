@@ -45,6 +45,6 @@
   "scheme": "light",
   "best_for": "Anything that should feel corporate-technical and trustworthy: instrument and device reviews, engineering presentations, internal technical reports, project demos, bilingual EN/CN technical decks. Also a solid choice for any B2B, medical-device, or lab-equipment context where the deck should read as institutional and precise.",
   "avoid_for": "Contexts that need warmth, playfulness, or editorial flair — the teal-navy palette and institutional footer commit to a corporate-technical voice.",
-  "slide_count": 10,
+  "slide_count": 12,
   "navigation": "inline keyboard handler with on-page slide counter"
 }

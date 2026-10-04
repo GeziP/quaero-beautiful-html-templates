@@ -12,6 +12,7 @@
 import { readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { join, dirname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { validateMetadata } from './lib/metadata.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, '..');
@@ -59,6 +60,8 @@ for (const slug of slugs) {
     const raw = readFileSync(metaPath, 'utf8');
     const meta = JSON.parse(raw);
 
+    const findings = validateMetadata(meta, slug);
+    if (findings.length) { errors.push(...findings); continue; }
     if (meta.slug !== slug) {
       errors.push(`${slug}: template.json slug "${meta.slug}" does not match folder name`);
       continue;
@@ -80,7 +83,6 @@ entries.sort((a, b) => a.slug.localeCompare(b.slug));
 
 const out = {
   schema_version: 1,
-  generated_at: new Date().toISOString(),
   template_count: entries.length,
   templates: entries
 };
