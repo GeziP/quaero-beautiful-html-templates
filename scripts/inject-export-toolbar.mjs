@@ -23,8 +23,8 @@ const REPO_ROOT = join(__dirname, '..');
 const TEMPLATES_DIR = join(REPO_ROOT, 'templates');
 
 const REMOVE_MODE = process.argv.includes('--remove');
-const TAG = '<script src="../../runtime/export-toolbar.js"></script>';
-const TAG_PATTERN = /<script\s+src="[^"]*export-toolbar\.js"><\/script>\s*/g;
+const TAG = '<script src="../../runtime/export-core.js"></script>\n<script src="../../runtime/export-toolbar.js"></script>';
+const TAG_PATTERN = /<script\s+src="[^"]*export-(?:toolbar|core)\.js"><\/script>\s*/g;
 
 function isDir(p) {
   try { return statSync(p).isDirectory(); } catch { return false; }
@@ -49,6 +49,7 @@ for (const slug of slugs) {
   let html = readFileSync(htmlPath, 'utf8');
 
   if (REMOVE_MODE) {
+    TAG_PATTERN.lastIndex = 0;
     if (TAG_PATTERN.test(html)) {
       html = html.replace(TAG_PATTERN, '');
       writeFileSync(htmlPath, html, 'utf8');
@@ -60,11 +61,12 @@ for (const slug of slugs) {
     continue;
   }
 
-  if (html.includes('export-toolbar.js')) {
+  if (html.includes('export-toolbar.js') && html.includes('export-core.js')) {
     skipped++;
     continue;
   }
 
+  html = html.replace(TAG_PATTERN, '');
   if (html.includes('</body>')) {
     html = html.replace('</body>', `${TAG}\n</body>`);
   } else if (html.includes('</html>')) {

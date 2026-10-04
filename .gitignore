@@ -7,3 +7,6 @@ Demo recordings/
 *qhi-htc*
 dist/
 data/
+
+node_modules/
+artifacts/

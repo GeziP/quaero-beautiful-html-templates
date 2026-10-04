@@ -57,40 +57,13 @@
   // --- Screenshot via native canvas ---
 
   async function captureSlideAsPng(slideEl, scale = 2) {
-    const rect = slideEl.getBoundingClientRect();
-    const canvas = document.createElement('canvas');
-    canvas.width = rect.width * scale;
-    canvas.height = rect.height * scale;
-    const ctx = canvas.getContext('2d');
-
-    const svgData = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="${rect.width}" height="${rect.height}">
-        <foreignObject width="100%" height="100%">
-          ${new XMLSerializer().serializeToString(inlineStyles(slideEl))}
-        </foreignObject>
-      </svg>`;
-
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-
-    return new Promise((resolve, reject) => {
-      img.onload = () => {
-        ctx.scale(scale, scale);
-        ctx.drawImage(img, 0, 0);
-        canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('Canvas toBlob failed')), 'image/png');
-      };
-      img.onerror = () => reject(new Error('SVG to image conversion failed'));
-      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData);
-    });
+    return window.QuaeroExport.captureSlide(slideEl, scale);
   }
 
   // --- WeChat copy ---
 
   async function copyForWechat() {
-    const deckStage = document.querySelector('deck-stage');
-    if (!deckStage) return showToast('No deck-stage found');
-
-    const slides = deckStage.querySelectorAll('section.slide, .slide');
+    const slides = window.QuaeroExport.slides();
     if (!slides.length) return showToast('No slides found');
 
     const wrapper = document.createElement('div');
@@ -112,44 +85,31 @@
           'text/plain': new Blob([html], { type: 'text/plain' }),
         })
       ]);
-      showToast('Copied for WeChat MP — paste into editor');
+      showToast('Copied HTML. Check layout and images in the WeChat editor.');
     } catch {
-      const ta = document.createElement('textarea');
-      ta.value = html;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      ta.remove();
-      showToast('HTML copied (fallback)');
+      return showToast('Rich HTML clipboard unavailable. Use PNG download.');
+
     }
   }
 
   // --- Download HTML ---
 
-  function downloadHtml() {
-    const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+  async function downloadHtml() {
+    const html = await window.QuaeroExport.standaloneHtml();
     const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = (document.title || 'deck') + '.html';
     a.click();
-    URL.revokeObjectURL(url);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
     showToast('Downloaded .html');
   }
 
   // --- Download PNG / Copy as image ---
 
   function getCurrentSlide() {
-    const deckStage = document.querySelector('deck-stage');
-    if (!deckStage) return null;
-    const slides = deckStage.querySelectorAll('section.slide, .slide');
-    for (const s of slides) {
-      const vis = window.getComputedStyle(s).visibility;
-      const opa = window.getComputedStyle(s).opacity;
-      if (vis !== 'hidden' && opa !== '0') return s;
-    }
-    return slides[0] || null;
+    return window.QuaeroExport.currentSlide();
   }
 
   async function downloadPng() {
@@ -162,7 +122,7 @@
       a.href = url;
       a.download = `${document.title || 'slide'}-${Date.now()}.png`;
       a.click();
-      URL.revokeObjectURL(url);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
       showToast('Downloaded .png');
     } catch (e) {
       showToast('PNG export failed: ' + e.message);
@@ -190,6 +150,7 @@
     if (!toast) {
       toast = document.createElement('div');
       toast.id = 'quaero-toast';
+      toast.setAttribute('role', 'status');
       toast.style.cssText = `
         position:fixed; bottom:80px; left:50%; transform:translateX(-50%);
         background:rgba(0,0,0,0.85); color:#fff; padding:10px 24px;
@@ -244,15 +205,21 @@
       <button data-action="html" title="Download full deck as .html">HTML</button>
     `;
 
-    bar.addEventListener('click', (e) => {
+    bar.addEventListener('click', async (e) => {
       const action = e.target.dataset?.action;
       if (!action) return;
+      const buttons = bar.querySelectorAll('button');
+      buttons.forEach(button => { button.disabled = true; });
+      try {
       switch (action) {
-        case 'wechat': copyForWechat(); break;
-        case 'image':  copyAsImage(); break;
-        case 'png':    downloadPng(); break;
-        case 'html':   downloadHtml(); break;
+        case 'wechat': await copyForWechat(); break;
+        case 'image':  await copyAsImage(); break;
+        case 'png':    await downloadPng(); break;
+        case 'html':   await downloadHtml(); break;
       }
+      } catch (error) {
+        showToast('Export failed: ' + error.message + '. Serve the deck over localhost for resource bundling.');
+      } finally { buttons.forEach(button => { button.disabled = false; }); }
     });
 
     document.body.appendChild(bar);
