@@ -101,7 +101,7 @@
     .hero-meta {
       font-family: 'Libre Baskerville', serif;
       font-size: clamp(11px, 1vw, 14px);
-      font-style: italic; color: var(--dark); opacity: 0.6;
+      color: var(--dark); opacity: 0.6;
       margin-bottom: 1.5vh; letter-spacing: 0.5px;
     }
     .hero-title-group {
@@ -136,7 +136,7 @@
     .hero-tagline .tag-body {
       font-family: 'Libre Baskerville', serif;
       font-size: clamp(13px, 1.2vw, 16px);
-      line-height: 1.6; color: var(--dark); font-style: italic;
+      line-height: 1.6; color: var(--dark); 
     }
 
     /* ---------- SLIDE 2: RED STATEMENT (ULTRA LOW) ---------- */
@@ -154,7 +154,7 @@
     .red-cite {
       font-family: 'Libre Baskerville', serif;
       font-size: clamp(13px, 1.3vw, 16px);
-      font-style: italic; margin-top: 3vh; opacity: 0.85;
+      margin-top: 3vh; opacity: 0.85;
     }
 
     /* ---------- SLIDE 3: EXECUTIVE SUMMARY (MEDIUM) ---------- */
@@ -283,7 +283,7 @@
     .stat-context {
       font-family: 'Libre Baskerville', serif;
       font-size: clamp(13px, 1.2vw, 16px);
-      font-style: italic; color: var(--dark); opacity: 0.7;
+      color: var(--dark); opacity: 0.7;
       margin-top: 3vh; max-width: 520px; line-height: 1.6;
     }
 
@@ -402,7 +402,7 @@
     .pillar .p-lead {
       font-family: 'Libre Baskerville', serif;
       font-size: clamp(12px, 1.1vw, 14px);
-      line-height: 1.6; color: var(--dark); font-style: italic;
+      line-height: 1.6; color: var(--dark); 
       margin-bottom: 12px;
     }
     .pillar .p-bullets {
@@ -481,7 +481,7 @@
     .close-sub {
       font-family: 'Libre Baskerville', serif;
       font-size: clamp(14px, 1.5vw, 18px);
-      font-style: italic; color: var(--dark);
+      color: var(--dark);
       margin-top: 4vh; max-width: 520px; line-height: 1.6;
     }
     .close-links {
@@ -523,7 +523,7 @@
   <span class="qhi-header-page" id="qhi-header-page">01 / 01</span>
 </div>
 <div class="quaero-footer" aria-hidden="true">
-  <img class="logo-img" src="../_quaero-shared/quaero-logo.png" width="383" height="134" alt="Quaero" />
+  <img class="logo-img" src="../_quaero-shared/quaero-logo.png" alt="Quaero" />
   <span class="conf-text">QUAERO Confidential - Distribution authorized to individuals with need to know only</span>
 </div>
 
@@ -897,6 +897,8 @@
       show(0);
     })();
   </script>
+<script src="../../runtime/export-core.js"></script>
+<script src="../../runtime/export-toolbar.js"></script>
 
 <!--quaero-chrome-injected-->
 <script>
@@ -904,7 +906,5 @@ window.__QUAERO_CHROME__ = {"frameX":"56px","frameInnerX":"10px"};
 </script>
 <script src="../_quaero-shared/chrome.js" defer></script>
 
-<script src="../../runtime/export-core.js"></script>
-<script src="../../runtime/export-toolbar.js"></script>
 </body>
 </html>

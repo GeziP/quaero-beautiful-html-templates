@@ -1,7 +1,7 @@
 {
   "slug": "quaero-pink-script",
   "name": "Quaero — Pink Script — After Hours",
-  "tagline": "Quaero institutional chrome · Black canvas, hot pink accent, pearl-cream paper, Instrument Serif headlines: late-night editorial luxury.",
+  "tagline": "Quaero institutional chrome · Black canvas, hot pink accent, pearl-cream paper, DM Serif Display headlines: late-night editorial luxury.",
   "mood": [
     "nocturnal",
     "moody",
@@ -35,7 +35,7 @@
     "description": "near-black canvas with one saturated hot pink accent and a pearl-cream paper for content; the whole system runs on a single accent + restraint"
   },
   "typography": {
-    "display": "Instrument Serif",
+    "display": "DM Serif Display",
     "body": "Inter",
     "mono": "JetBrains Mono",
     "style": "sharp transitional serif headlines + clean sans body + technical mono labels"

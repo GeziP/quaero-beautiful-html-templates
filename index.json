@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-14T06:03:36.825Z",
-  "template_count": 65,
+  "generated_at": "2026-10-04T12:47:05.698Z",
+  "template_count": 69,
   "templates": [
     {
       "slug": "8-bit-orbit",
@@ -253,7 +253,7 @@
     {
       "slug": "cobalt-grid",
       "name": "Cobalt Grid",
-      "tagline": "Electric cobalt italic serifs on a graph-paper canvas, anchored by stair-stepped pixel-glitch decorations and slim hairline rules.",
+      "tagline": "Electric cobalt serifs on a graph-paper canvas, anchored by stair-stepped pixel-glitch decorations and slim hairline rules.",
       "mood": [
         "editorial",
         "design-research",
@@ -377,6 +377,37 @@
       "slide_count": 10
     },
     {
+      "slug": "editorial-forest",
+      "name": "Editorial Forest",
+      "tagline": "Forest green, dusty pink, and warm cream meet Source Serif 4 in a quiet, intentional quarterly-review deck.",
+      "mood": [
+        "editorial",
+        "quiet",
+        "considered",
+        "warm",
+        "intentional"
+      ],
+      "occasion": [
+        "quarterly review",
+        "internal readout",
+        "studio update",
+        "creative agency deck",
+        "research recap"
+      ],
+      "tone": [
+        "literary",
+        "thoughtful",
+        "warm",
+        "low-pressure"
+      ],
+      "formality": "medium",
+      "density": "medium",
+      "scheme": "mixed",
+      "best_for": "Anything that should feel like a considered editorial — quarterly reviews, internal readouts, studio updates, creative-agency presentations. Equally good for any deck that wants to feel warm and unhurried rather than corporate, including research recaps, book or program announcements, and team retrospectives.",
+      "avoid_for": "Contexts that need to feel urgent, punchy, or sales-driven — the palette and rhythm are intentionally quiet.",
+      "slide_count": 8
+    },
+    {
       "slug": "editorial-tri-tone",
       "name": "Editorial Tri-Tone",
       "tagline": "Three-color editorial system: dusty pink, mustard cream, and deep burgundy, set in Bricolage + Instrument Serif.",
@@ -404,6 +435,36 @@
       "scheme": "mixed",
       "best_for": "Anything that should feel like a fashion-magazine spread: editorial pitches, fashion brand decks, lifestyle media, art direction reviews. Equally good for any deck — including tech, research, or business — that wants tri-tone discipline and serif/sans contrast instead of the usual neutrals.",
       "avoid_for": "Decks that need to read as soft or comforting — the burgundy/pink/cream tri-tone is intentionally high-contrast and styled.",
+      "slide_count": 8
+    },
+    {
+      "slug": "emerald-editorial",
+      "name": "Emerald Editorial",
+      "tagline": "A magazine-cover business deck: emerald + navy + paper, double-rule masthead ornaments, and a bold Bodoni-style display serif.",
+      "mood": [
+        "editorial",
+        "considered",
+        "confident",
+        "magazine-cover"
+      ],
+      "occasion": [
+        "leadership presentation",
+        "quarterly review",
+        "strategy readout",
+        "planning office deck",
+        "executive briefing"
+      ],
+      "tone": [
+        "literary",
+        "authoritative",
+        "warm",
+        "designed"
+      ],
+      "formality": "medium-high",
+      "density": "medium",
+      "scheme": "mixed",
+      "best_for": "Anything that should feel like the front of a serious magazine, including but not limited to leadership readouts, planning-office reviews, and strategy briefings. The double-rule masthead ornament gives it editorial gravitas without making it stiff — also a great unexpected pick for product launches or research recaps that want to feel considered rather than corporate.",
+      "avoid_for": "Contexts that need to read as quiet, neutral, or institutionally restrained — the emerald field is too saturated to disappear into the background.",
       "slide_count": 8
     },
     {
@@ -442,7 +503,7 @@
     {
       "slug": "long-table",
       "name": "Long Table",
-      "tagline": "Warm cream and rust-red supper-club aesthetic with bold uppercase grotesk headlines, italic Fraunces, and pill-shaped outlined buttons.",
+      "tagline": "Warm cream and rust-red supper-club aesthetic with bold uppercase grotesk headlines, Fraunces serifs, and pill-shaped outlined buttons.",
       "mood": [
         "warm",
         "intimate",
@@ -472,8 +533,8 @@
       "formality": "medium",
       "density": "medium",
       "scheme": "light",
-      "best_for": "Anything that should feel like a warm, intimate, modern hospitality / community brand: supper clubs, dinner series, small restaurants, creative-studio events, membership pitches, lifestyle and wine brands. Equally good for any deck wanting a single warm accent colour, italic-meets-bold typography, and a social-media-aware modern-editorial voice.",
-      "avoid_for": "Decks that need corporate polish, technical density, or a cold / minimalist register — the rust-red palette and bold-italic mix are intentionally warm and people-facing.",
+      "best_for": "Anything that should feel like a warm, intimate, modern hospitality / community brand: supper clubs, dinner series, small restaurants, creative-studio events, membership pitches, lifestyle and wine brands. Equally good for any deck wanting a single warm accent colour, mixed-weight typography, and a social-media-aware modern-editorial voice.",
+      "avoid_for": "Decks that need corporate polish, technical density, or a cold / minimalist register — the rust-red palette and bold serif mix are intentionally warm and people-facing.",
       "slide_count": 8
     },
     {
@@ -635,7 +696,7 @@
     {
       "slug": "pink-script",
       "name": "Pink Script — After Hours",
-      "tagline": "Black canvas, hot pink accent, pearl-cream paper, Instrument Serif headlines: late-night editorial luxury.",
+      "tagline": "Black canvas, hot pink accent, pearl-cream paper, DM Serif Display headlines: late-night editorial luxury.",
       "mood": [
         "nocturnal",
         "moody",
@@ -958,7 +1019,7 @@
     {
       "slug": "quaero-cobalt-grid",
       "name": "Quaero — Cobalt Grid",
-      "tagline": "Quaero institutional chrome · Electric cobalt italic serifs on a graph-paper canvas, anchored by stair-stepped pixel-glitch decorations and slim hairline rules.",
+      "tagline": "Quaero institutional chrome · Electric cobalt serifs on a graph-paper canvas, anchored by stair-stepped pixel-glitch decorations and slim hairline rules.",
       "mood": [
         "editorial",
         "design-research",
@@ -1090,6 +1151,39 @@
       "slide_count": 10
     },
     {
+      "slug": "quaero-editorial-forest",
+      "name": "Quaero — Editorial Forest",
+      "tagline": "Quaero institutional chrome · Forest green, dusty pink, and warm cream meet Source Serif 4 in a quiet, intentional quarterly-review deck.",
+      "mood": [
+        "editorial",
+        "quiet",
+        "considered",
+        "warm",
+        "intentional"
+      ],
+      "occasion": [
+        "quarterly review",
+        "internal readout",
+        "studio update",
+        "creative agency deck",
+        "research recap"
+      ],
+      "tone": [
+        "literary",
+        "thoughtful",
+        "warm",
+        "low-pressure",
+        "corporate",
+        "institutional"
+      ],
+      "formality": "medium",
+      "density": "medium",
+      "scheme": "mixed",
+      "best_for": "Anything that should feel like a considered editorial — quarterly reviews, internal readouts, studio updates, creative-agency presentations. Equally good for any deck that wants to feel warm and unhurried rather than corporate, including research recaps, book or program announcements, and team retrospectives.",
+      "avoid_for": "Contexts that need to feel urgent, punchy, or sales-driven — the palette and rhythm are intentionally quiet.",
+      "slide_count": 8
+    },
+    {
       "slug": "quaero-editorial-tri-tone",
       "name": "Quaero — Editorial Tri-Tone",
       "tagline": "Quaero institutional chrome · Three-color editorial system: dusty pink, mustard cream, and deep burgundy, set in Bricolage + Instrument Serif.",
@@ -1119,6 +1213,38 @@
       "scheme": "mixed",
       "best_for": "Anything that should feel like a fashion-magazine spread: editorial pitches, fashion brand decks, lifestyle media, art direction reviews. Equally good for any deck — including tech, research, or business — that wants tri-tone discipline and serif/sans contrast instead of the usual neutrals.",
       "avoid_for": "Decks that need to read as soft or comforting — the burgundy/pink/cream tri-tone is intentionally high-contrast and styled.",
+      "slide_count": 8
+    },
+    {
+      "slug": "quaero-emerald-editorial",
+      "name": "Quaero — Emerald Editorial",
+      "tagline": "Quaero institutional chrome · A magazine-cover business deck: emerald + navy + paper, double-rule masthead ornaments, and a bold Bodoni-style display serif.",
+      "mood": [
+        "editorial",
+        "considered",
+        "confident",
+        "magazine-cover"
+      ],
+      "occasion": [
+        "leadership presentation",
+        "quarterly review",
+        "strategy readout",
+        "planning office deck",
+        "executive briefing"
+      ],
+      "tone": [
+        "literary",
+        "authoritative",
+        "warm",
+        "designed",
+        "corporate",
+        "institutional"
+      ],
+      "formality": "medium-high",
+      "density": "medium",
+      "scheme": "mixed",
+      "best_for": "Anything that should feel like the front of a serious magazine, including but not limited to leadership readouts, planning-office reviews, and strategy briefings. The double-rule masthead ornament gives it editorial gravitas without making it stiff — also a great unexpected pick for product launches or research recaps that want to feel considered rather than corporate.",
+      "avoid_for": "Contexts that need to read as quiet, neutral, or institutionally restrained — the emerald field is too saturated to disappear into the background.",
       "slide_count": 8
     },
     {
@@ -1193,7 +1319,7 @@
     {
       "slug": "quaero-long-table",
       "name": "Quaero — Long Table",
-      "tagline": "Quaero institutional chrome · Warm cream and rust-red supper-club aesthetic with bold uppercase grotesk headlines, italic Fraunces, and pill-shaped outlined buttons.",
+      "tagline": "Quaero institutional chrome · Warm cream and rust-red supper-club aesthetic with bold uppercase grotesk headlines, Fraunces serifs, and pill-shaped outlined buttons.",
       "mood": [
         "warm",
         "intimate",
@@ -1225,8 +1351,8 @@
       "formality": "medium",
       "density": "medium",
       "scheme": "light",
-      "best_for": "Anything that should feel like a warm, intimate, modern hospitality / community brand: supper clubs, dinner series, small restaurants, creative-studio events, membership pitches, lifestyle and wine brands. Equally good for any deck wanting a single warm accent colour, italic-meets-bold typography, and a social-media-aware modern-editorial voice.",
-      "avoid_for": "Decks that need corporate polish, technical density, or a cold / minimalist register — the rust-red palette and bold-italic mix are intentionally warm and people-facing.",
+      "best_for": "Anything that should feel like a warm, intimate, modern hospitality / community brand: supper clubs, dinner series, small restaurants, creative-studio events, membership pitches, lifestyle and wine brands. Equally good for any deck wanting a single warm accent colour, mixed-weight typography, and a social-media-aware modern-editorial voice.",
+      "avoid_for": "Decks that need corporate polish, technical density, or a cold / minimalist register — the rust-red palette and bold serif mix are intentionally warm and people-facing.",
       "slide_count": 8
     },
     {
@@ -1398,7 +1524,7 @@
     {
       "slug": "quaero-pink-script",
       "name": "Quaero — Pink Script — After Hours",
-      "tagline": "Quaero institutional chrome · Black canvas, hot pink accent, pearl-cream paper, Instrument Serif headlines: late-night editorial luxury.",
+      "tagline": "Quaero institutional chrome · Black canvas, hot pink accent, pearl-cream paper, DM Serif Display headlines: late-night editorial luxury.",
       "mood": [
         "nocturnal",
         "moody",
@@ -1762,7 +1888,7 @@
     {
       "slug": "quaero-vellum",
       "name": "Quaero — Vellum",
-      "tagline": "Quaero institutional chrome · Deep navy canvas with warm-yellow italic Cormorant serifs and a single dusty teal accent. A quiet, scholarly aesthetic.",
+      "tagline": "Quaero institutional chrome · Deep navy canvas with warm-yellow Cormorant serifs and a single dusty teal accent. A quiet, scholarly aesthetic.",
       "mood": [
         "scholarly",
         "literary",
@@ -1791,7 +1917,7 @@
       "density": "low",
       "scheme": "dark",
       "best_for": "Anything that should feel scholarly, literary, and quietly intelligent: research synthesis, white papers, academic and policy briefs, advisory deliverables, longform editorial pieces, founder reflections. Equally strong for any deck — including tech, business, or creator work — that wants a calm, considered atmosphere instead of energetic visuals.",
-      "avoid_for": "Contexts that need visual heat or pop — the navy + warm-yellow italic-Cormorant aesthetic is intentionally low-tempo.",
+      "avoid_for": "Contexts that need visual heat or pop — the navy + warm-yellow Cormorant aesthetic is intentionally low-tempo.",
       "slide_count": 9
     },
     {
@@ -2079,7 +2205,7 @@
     {
       "slug": "vellum",
       "name": "Vellum",
-      "tagline": "Deep navy canvas with warm-yellow italic Cormorant serifs and a single dusty teal accent. A quiet, scholarly aesthetic.",
+      "tagline": "Deep navy canvas with warm-yellow Cormorant serifs and a single dusty teal accent. A quiet, scholarly aesthetic.",
       "mood": [
         "scholarly",
         "literary",
@@ -2106,7 +2232,7 @@
       "density": "low",
       "scheme": "dark",
       "best_for": "Anything that should feel scholarly, literary, and quietly intelligent: research synthesis, white papers, academic and policy briefs, advisory deliverables, longform editorial pieces, founder reflections. Equally strong for any deck — including tech, business, or creator work — that wants a calm, considered atmosphere instead of energetic visuals.",
-      "avoid_for": "Contexts that need visual heat or pop — the navy + warm-yellow italic-Cormorant aesthetic is intentionally low-tempo.",
+      "avoid_for": "Contexts that need visual heat or pop — the navy + warm-yellow Cormorant aesthetic is intentionally low-tempo.",
       "slide_count": 9
     }
   ]

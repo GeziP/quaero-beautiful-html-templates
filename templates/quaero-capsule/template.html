@@ -543,7 +543,7 @@
     font-family: var(--font-display);
     font-size: clamp(1.6rem, 3.5vw, 3rem);
     font-weight: 600;
-    font-style: italic;
+    
     line-height: 1.35;
     letter-spacing: -0.01em;
     position: relative;
@@ -1067,7 +1067,7 @@
   <span class="qhi-header-page" id="qhi-header-page">01 / 01</span>
 </div>
 <div class="quaero-footer" aria-hidden="true">
-  <img class="logo-img" src="../_quaero-shared/quaero-logo.png" width="383" height="134" alt="Quaero" />
+  <img class="logo-img" src="../_quaero-shared/quaero-logo.png" alt="Quaero" />
   <span class="conf-text">QUAERO Confidential - Distribution authorized to individuals with need to know only</span>
 </div>
 
@@ -1433,6 +1433,8 @@
   }, { passive: true });
 </script>
 
+<script src="../../runtime/export-core.js"></script>
+<script src="../../runtime/export-toolbar.js"></script>
 
 <!--quaero-chrome-injected-->
 <script>
@@ -1440,7 +1442,5 @@ window.__QUAERO_CHROME__ = {};
 </script>
 <script src="../_quaero-shared/chrome.js" defer></script>
 
-<script src="../../runtime/export-core.js"></script>
-<script src="../../runtime/export-toolbar.js"></script>
 </body>
 </html>
