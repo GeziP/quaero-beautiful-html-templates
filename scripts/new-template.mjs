@@ -5,7 +5,7 @@
  * Creates templates/<slug>/ with:
  *   - previews/                 (used by the 3-cover-variation step)
  *   - deck-stage.js             (copied from /runtime — keeps the template
- *                                self-contained per TEMPLATE_SPEC § 3)
+ *                                self-contained)
  *
  * Usage:
  *   node scripts/new-template.mjs <slug>
@@ -62,8 +62,8 @@ console.log(`  · deck-stage.js     (copied from runtime/)`);
 console.log("");
 console.log("Next steps:");
 console.log(`  1. Build 3 cover variations in templates/${slug}/previews/`);
-console.log(`  2. After Zara picks one, write templates/${slug}/template.html`);
+console.log(`  2. After the user picks one, write templates/${slug}/template.html`);
 console.log(`     (wrap slides in <deck-stage width="1920" height="1080">)`);
-console.log(`  3. Write templates/${slug}/template.json per TEMPLATE_SPEC § 5`);
-console.log(`  4. Run: bun run .tools/verify.ts templates/${slug}/template.html`);
+console.log(`  3. Write templates/${slug}/template.json with mood, tone, palette, typography, and navigation metadata`);
+console.log(`  4. Run: npm run verify`);
 console.log(`  5. Run: node scripts/build-index.mjs`);

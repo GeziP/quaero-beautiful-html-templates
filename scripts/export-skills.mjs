@@ -10,10 +10,11 @@
  * Run: node scripts/export-skills.mjs
  */
 
-import { readdirSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, statSync, existsSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, statSync, existsSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { packageHtml } from './lib/package-assets.mjs';
+import { skillBody } from './lib/skill-text.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, '..');
@@ -44,7 +45,7 @@ function buildFrontmatter(meta) {
     `zh_name: ${JSON.stringify(meta.name)}`,
     `en_name: ${JSON.stringify(meta.name)}`,
     `emoji: "🎴"`,
-    `description: ${JSON.stringify(meta.tagline)}`,
+    `description: ${JSON.stringify('Create or edit an HTML presentation in the ' + meta.name + ' style. ' + meta.tagline)}`,
     `mode: deck`,
     `scenario: ${inferScenario(meta)}`,
     `surface: "1920x1080"`,
@@ -63,99 +64,11 @@ function buildFrontmatter(meta) {
   ].join('\n');
 }
 
-function buildPaletteConstraints(palette) {
-  if (!palette) return '- No palette metadata available — follow the example.html colors exactly.';
-  const lines = [];
-  for (const [key, val] of Object.entries(palette)) {
-    if (key === 'description') continue;
-    lines.push(`  - \`--${key}\`: \`${val}\``);
-  }
-  return [
-    `- **Color palette (CSS variables, mandatory):**`,
-    ...lines,
-    `- Palette description: ${palette.description || 'see example.html'}`,
-    `- Never introduce new colors. If a layout needs a tint, derive it from these variables with opacity.`,
-  ].join('\n');
-}
-
-function buildTypographyConstraints(typo) {
-  if (!typo) return '- No typography metadata — follow example.html fonts exactly.';
-  const lines = [`- **Typography (locked, never substitute):**`];
-  if (typo.display) lines.push(`  - Display / headlines: \`${typo.display}\``);
-  if (typo.body)    lines.push(`  - Body text: \`${typo.body}\``);
-  if (typo.mono)    lines.push(`  - Monospace / captions: \`${typo.mono}\``);
-  if (typo.cn)      lines.push(`  - CJK fallback: \`${typo.cn}\``);
-  if (typo.style)   lines.push(`  - Style note: ${typo.style}`);
-  return lines.join('\n');
-}
-
-function buildSkillBody(meta) {
-  return `
-# ${meta.name} — Quaero Deck Skill
-
-${meta.tagline}
-
-This is a **locked design system** — a complete visual identity with pre-defined fonts, palette,
-decorative vocabulary, spacing, and chrome. The agent's job is to **fill in content**, not redesign.
-Every slide must look like it belongs in the same deck as the \`example.html\`.
-
-## Identity
-
-- **Mood:** ${meta.mood.join(', ')}
-- **Tone:** ${meta.tone.join(', ')}
-- **Formality:** ${meta.formality}
-- **Density:** ${meta.density}
-- **Scheme:** ${meta.scheme}
-- **Best for:** ${meta.best_for}
-- **Avoid for:** ${meta.avoid_for}
-
-## Hard constraints
-
-${buildPaletteConstraints(meta.palette)}
-
-${buildTypographyConstraints(meta.typography)}
-
-- **8 px baseline rhythm.** All spacing, padding, margin, line-height should be multiples of 8 px.
-- **Color contrast ≥ 4.5** for all text on background combinations.
-- **No lorem ipsum.** Use the user's real data. No invented metrics, no placeholder names.
-- **No pure black (#000) or pure white (#FFF)** unless the design system explicitly uses them.
-- **Navigation:** ${meta.navigation || 'deck-stage.js runtime — arrow keys, space, PgUp/PgDn, Home/End'}.
-  The \`<deck-stage>\` web component handles all keyboard nav, scaling, and print. Include it via
-  \`<script src="deck-stage.js"></script>\` in the \`<head>\`. Slides are \`<section class="slide">\`
-  children of \`<deck-stage>\`.
-
-## Layout rules
-
-- **Slide count:** The example has ${meta.slide_count} slides. Match the user's content volume —
-  duplicate existing layouts to add more, drop from the bottom to reduce.
-- **Preserve all decorative elements** — corner marks, grain overlays, geometric shapes, SVG ornaments.
-  They are part of the identity, not optional decoration.
-- **Preserve the grid structure** — column count, absolute positioning, flex hierarchies.
-- **Preserve slide-level CSS classes** (e.g. \`.slide--cover\`, \`.s-toc\`, \`.layout-*\`).
-- **Page numbers** follow the template's format. Update counts when adding/removing slides.
-
-## What "good" looks like
-
-- Opens the example.html, reads the design system, produces a new deck that is visually indistinguishable in style.
-- Every slide uses the same fonts, palette, spacing, and decorative vocabulary as the example.
-- New layouts (if the user needs a table, chart, or comparison the example doesn't have) are designed using the existing design system — same fonts, same colors, same decorative vocabulary.
-
-## What "bad" looks like
-
-- Substituting fonts ("Inter is similar enough" — no, \`${meta.typography?.display || 'the template font'}\` is the design system).
-- Recoloring ("let's use blue instead" — no, the palette is locked).
-- Stripping decorative elements ("they're just noise" — no, they are the identity).
-- Mixing layouts from a different template.
-- Using generic CSS instead of the template's established classes and variables.
-`.trim();
-}
-
 // --- main ---
 
-if (existsSync(OUT_DIR)) {
-  console.log(`Cleaning ${OUT_DIR}...`);
-  // We just overwrite — no recursive rm needed
-}
+// OUT_DIR is a fixed child of this repository, never a user-provided path.
+if (dirname(dirname(OUT_DIR)) !== REPO_ROOT) throw new Error('Unsafe output directory');
+rmSync(OUT_DIR, { recursive: true, force: true });
 mkdirSync(OUT_DIR, { recursive: true });
 
 const slugs = readdirSync(TEMPLATES_DIR).filter(name => {
@@ -184,8 +97,19 @@ for (const slug of slugs) {
   mkdirSync(join(outDir, 'assets'), { recursive: true });
 
   // 1. Generate SKILL.md
-  const skillMd = buildFrontmatter(meta) + '\n\n' + buildSkillBody(meta) + '\n';
+  const html = readFileSync(join(srcDir, 'template.html'), 'utf8');
+  const runtime = /<deck-stage\b/i.test(html) ? 'deck-stage' : 'inline';
+  const skillMd = buildFrontmatter(meta) + '\n\n' + skillBody(meta, runtime);
   writeFileSync(join(outDir, 'SKILL.md'), skillMd, 'utf8');
+
+  const refsDir = join(outDir, 'references');
+  mkdirSync(refsDir, { recursive: true });
+  const designPath = join(srcDir, 'design.md');
+  if (!existsSync(designPath)) throw new Error(`${slug}: missing design.md`);
+  copyFileSync(designPath, join(refsDir, 'design.md'));
+  for (const name of ['content-and-cjk.md', 'quaero-chrome.md', 'verification.md']) {
+    copyFileSync(join(REPO_ROOT, 'docs', name), join(refsDir, name));
+  }
 
   // Copy each referenced dependency and rewrite HTML references into assets/.
   const htmlPath = join(srcDir, 'template.html');
