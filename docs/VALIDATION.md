@@ -56,4 +56,16 @@ Windows 使用 Edge 时，在 PowerShell 中先设置 `$env:BROWSER_CHANNEL='mse
 
 微信公众号编辑器的粘贴结果、Safari/Firefox、用户设备的剪贴板权限尚未实测。PNG 使用 SVG foreignObject，新增复杂滤镜或其他浏览器需要重新验证。没有把这些能力列为已经验证。
 
-本次为按文件同步上游最终版本并重建变体，未把上游全部提交历史合并进 fork 的 main。同步来源详见 `upstream-sync.json`。四批升级通过依次审阅的 PR 交付，main 尚未修改。
+本次为按文件同步上游最终版本并重建变体，未把上游全部提交历史合并进 fork 的 main。同步来源详见 `upstream-sync.json`。四批升级最初通过依次审阅的草稿 PR 交付，随后按用户指令合入 main。实际演示保留验收时的汇报内容。
+
+## 实际中文演示验收
+
+使用升级后的 Quaero Editorial Forest Skill 生成了 8 页完整中文演示，源码见 [实际演示示例](../examples/upgrade-validation/index.html)，机器记录见 [actual-slide-validation.json](actual-slide-validation.json)。
+
+- 8/8 页逐页检查：文本未越过画布或侵入品牌页眉页脚，页码为 01–08，无缺失图片。
+- 已人工查看全部 8 页浏览器预览与全部 8 页导出 PNG，未发现裁切或内容缺失。
+- Chromium 字体使用记录确认标题实际使用 LXGW WenKai TC，正文使用 Noto Serif SC；断网回放后标题仍使用内嵌字体。
+- 独立 HTML 为 23,529,913 字节。断网加载不请求网络，前后翻页通过。
+- 8/8 页 PNG 导出成功，均为 3840 × 2160，全部像素不透明。
+
+这是 Windows Edge 上对该实际演示的验收，不代表所有模板的每页或所有浏览器都已经实测。独立 HTML 与高清 PNG 作为本地交付产物，未把大体积字体内嵌文件加入 Git。

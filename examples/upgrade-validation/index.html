@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+<!--quaero-chrome-injected-->
+<link rel="stylesheet" href="../../templates/_quaero-shared/chrome.css" />
+<style id="quaero-chrome-overrides">
+</style>
+
+
+<meta charset="utf-8" />
+<title>Quaero 模板库升级与实测验收</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600;8..60,700;8..60,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<script src="../../templates/quaero-editorial-forest/deck-stage.js"></script>
+<style>
+  :root {
+    --green: #2e4a2a;
+    --green-deep: #243a21;
+    --green-lite: #3a5a36;
+    --pink: #e89cb1;
+    --pink-deep: #d27e96;
+    --cream: #efe7d4;
+    --cream-2: #e6dcc4;
+    --ink: #1a1a17;
+    --serif: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  html, body { margin: 0; padding: 0; background: #111; }
+  deck-stage { font-family: var(--serif); color: var(--ink); }
+
+  section {
+    box-sizing: border-box;
+    width: 1920px;
+    height: 1080px;
+    padding: 96px 120px;
+    background: var(--cream);
+    color: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 26px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ============ 01 — Cover ============ */
+  .cover {
+    background: var(--green);
+    color: var(--pink);
+    padding: 100px 140px;
+  }
+  .cover .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--pink);
+  }
+  .cover .topbar .label { color: var(--pink); }
+  .cover .mark {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 2px solid var(--pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 28px;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+  .cover h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 220px;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    margin: 40px 0 0 0;
+  }
+  .cover .footline {
+    position: absolute;
+    bottom: 80px;
+    left: 140px;
+    right: 140px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 28px;
+    color: var(--pink);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ============ 02 — Agenda (tiles) ============ */
+  .agenda {
+    background: var(--cream);
+    padding: 90px 120px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 36px;
+  }
+  .agenda .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 40px;
+  }
+  .agenda h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 96px;
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    color: var(--green);
+    margin: 0;
+    white-space: nowrap;
+  }
+  .agenda .head .label { color: var(--green); white-space: nowrap; }
+  .agenda-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 24px;
+  }
+  .topic {
+    border-radius: 6px;
+    position: relative;
+    padding: 40px 40px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 0;
+  }
+  .topic.t-green { background: var(--green); color: var(--pink); grid-row: span 2; }
+  .topic.t-pink { background: var(--pink); color: var(--green-deep); }
+  .topic.t-greenLite { background: var(--green-lite); color: var(--pink); }
+  .topic.t-cream { background: var(--cream-2); color: var(--green); border: 2px solid var(--green); }
+  .topic .num {
+    font-family: var(--mono);
+    font-size: 26px;
+    letter-spacing: 0.14em;
+    font-weight: 500;
+  }
+  .topic h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    margin: 28px 0 0 0;
+  }
+  .topic.t-green h3 { font-size: 84px; }
+  .topic p {
+    font-family: var(--serif);
+    font-size: 26px;
+    line-height: 1.32;
+    margin: 16px 0 0 0;
+    max-width: 100%;
+    font-weight: 400;
+  }
+  .topic .foot {
+    font-family: var(--mono);
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 20px;
+  }
+
+  /* ============ 03 — Statement (big idea) ============ */
+  .statement {
+    background: var(--pink);
+    color: var(--green-deep);
+    padding: 130px 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .statement .label { color: var(--green-deep); }
+  .statement blockquote {
+    margin: 48px 0 0 0;
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 140px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    max-width: 1560px;
+  }
+  .statement .attrib {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 60px;
+    font-family: var(--mono);
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 500;
+    gap: 60px;
+  }
+  .statement .attrib > div { display: flex; flex-direction: column; gap: 14px; white-space: nowrap; }
+  .statement .attrib .name {
+    font-family: var(--serif);
+    font-size: 44px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  /* ============ 04 — Two-column with image ============ */
+  .two-col {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 880px 1fr;
+    gap: 100px;
+    align-items: stretch;
+    padding: 110px 120px;
+  }
+  .two-col .col-img {
+    background: var(--green);
+    color: var(--pink);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .two-col .col-img .figure {
+    font-family: var(--serif);
+    font-size: 56px;
+    color: var(--pink);
+    font-weight: 500;
+    text-align: center;
+    padding: 0 40px;
+    line-height: 1.05;
+  }
+  .two-col .col-img .caption {
+    position: absolute;
+    bottom: 36px;
+    left: 36px;
+    right: 36px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 26px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--pink);
+  }
+  .two-col .col-text { display: flex; flex-direction: column; padding-top: 8px; }
+  .two-col .eyebrow {
+    font-family: var(--mono);
+    font-size: 26px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 500;
+    margin-bottom: 32px;
+  }
+  .two-col h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 96px;
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    color: var(--green);
+    margin: 0 0 40px 0;
+  }
+  .two-col p {
+    font-family: var(--serif);
+    font-size: 30px;
+    line-height: 1.38;
+    color: var(--ink);
+    margin: 0 0 24px 0;
+    max-width: 760px;
+    font-weight: 400;
+    text-wrap: pretty;
+  }
+  .two-col .meta {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    border-top: 2px solid var(--green);
+    padding-top: 32px;
+  }
+  .two-col .meta dt {
+    font-family: var(--mono);
+    font-size: 24px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .two-col .meta dd {
+    font-family: var(--serif);
+    font-size: 32px;
+    color: var(--ink);
+    margin: 0;
+    font-weight: 500;
+  }
+
+  /* ============ 05 — Data / chart ============ */
+  .data { background: var(--green); color: var(--cream); padding: 100px 120px; }
+  .data .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+  }
+  .data .head .label { color: var(--pink); }
+  .data h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 84px;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    margin: 16px 0 0 0;
+    max-width: 1200px;
+  }
+  .data .legend {
+    display: flex;
+    gap: 36px;
+    margin-top: 18px;
+    font-family: var(--mono);
+    font-size: 26px;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+    text-transform: uppercase;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .data .legend .sw {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    margin-right: 12px;
+    vertical-align: -4px;
+    border-radius: 2px;
+  }
+  .chart {
+    margin-top: 110px;
+    height: 520px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: 1fr 60px;
+    column-gap: 24px;
+  }
+  .chart .yaxis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 26px;
+    color: var(--cream);
+    text-align: right;
+    padding-right: 8px;
+    font-weight: 500;
+  }
+  .chart .plot {
+    position: relative;
+    border-left: 2px solid var(--cream);
+    border-bottom: 2px solid var(--cream);
+    padding: 0 30px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+  }
+  .chart .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(to top, transparent 0 calc(25% - 1px), rgba(239,231,212,0.18) calc(25% - 1px) 25%);
+    pointer-events: none;
+  }
+  .bar-group { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; justify-content: flex-end; gap: 8px; }
+  .bar-pair { display: flex; align-items: flex-end; gap: 12px; height: 100%; width: 100%; justify-content: center; }
+  .bar { width: 56px; border-radius: 3px 3px 0 0; position: relative; }
+  .bar.a { background: var(--pink); }
+  .bar.b { background: var(--cream); }
+  .bar .val {
+    position: absolute;
+    top: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 24px;
+    color: var(--cream);
+    font-weight: 500;
+  }
+  .chart .xlabel-row {
+    grid-column: 2;
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 30px 0;
+    font-family: var(--mono);
+    font-size: 26px;
+    color: var(--cream);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .chart .xlabel { flex: 1; text-align: center; }
+  .data .footnote {
+    position: absolute;
+    bottom: 60px;
+    left: 120px;
+    right: 120px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 26px;
+    color: var(--pink);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ============ 06 — Framework / 4 steps ============ */
+  .framework { background: var(--cream); padding: 100px 120px; }
+  .framework .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 40px;
+  }
+  .framework .head .label { color: var(--green); white-space: nowrap; }
+  .framework h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 96px;
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    color: var(--green);
+    margin: 24px 0 0 0;
+    max-width: 1500px;
+  }
+  .flow {
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    align-items: stretch;
+  }
+  .step {
+    border-radius: 8px;
+    padding: 40px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    min-height: 470px;
+    border: 2.5px solid var(--green);
+    background: var(--cream);
+    color: var(--green);
+  }
+  .step.fill { background: var(--green); color: var(--pink); border-color: var(--green); }
+  .step.pinkfill { background: var(--pink); color: var(--green-deep); border-color: var(--pink-deep); }
+  .step .num {
+    font-family: var(--mono);
+    font-size: 26px;
+    letter-spacing: 0.16em;
+    font-weight: 500;
+  }
+  .step h3 {
+    font-family: var(--serif);
+    font-size: 68px;
+    line-height: 0.96;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 24px 0 24px 0;
+  }
+  .step p {
+    font-family: var(--serif);
+    font-size: 26px;
+    line-height: 1.34;
+    margin: 0;
+    font-weight: 400;
+  }
+  .step .marker {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 24px;
+    border-top: 2px solid currentColor;
+    font-family: var(--mono);
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ============ 07 — Big stats / KPI callouts ============ */
+  .stats { background: var(--green); color: var(--cream); padding: 100px 120px; }
+  .stats .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 40px;
+  }
+  .stats .head .label { color: var(--pink); white-space: nowrap; }
+  .stats h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 80px;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    margin: 18px 0 0 0;
+    max-width: 1400px;
+  }
+  .kpi-row {
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    border-top: 2px solid var(--pink);
+    padding-top: 56px;
+  }
+  .kpi { display: flex; flex-direction: column; gap: 16px; }
+  .kpi .tag {
+    font-family: var(--mono);
+    font-size: 24px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pink);
+    font-weight: 500;
+  }
+  .kpi .big {
+    font-family: var(--serif);
+    font-size: 220px;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--pink);
+    font-weight: 500;
+  }
+  .kpi .big .unit {
+    font-size: 110px;
+    color: var(--cream);
+    margin-left: 4px;
+  }
+  .kpi .desc {
+    font-family: var(--serif);
+    font-size: 30px;
+    line-height: 1.32;
+    color: var(--cream);
+    margin: 8px 0 0 0;
+    font-weight: 400;
+  }
+
+  /* ============ 08 — Summary / closing ============ */
+  .summary { background: var(--green); color: var(--cream); padding: 110px 140px; }
+  .summary .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .summary .topbar .label { color: var(--pink); }
+  .summary h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 220px;
+    line-height: 0.94;
+    letter-spacing: -0.02em;
+    color: var(--pink);
+    margin: 50px 0 0 0;
+  }
+  .summary .grid-cols {
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    border-top: 2px solid var(--pink);
+    padding-top: 36px;
+  }
+  .summary .grid-cols h4 {
+    font-family: var(--mono);
+    font-size: 26px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin: 0 0 18px 0;
+    font-weight: 500;
+  }
+  .summary .grid-cols p {
+    font-family: var(--serif);
+    font-size: 32px;
+    line-height: 1.32;
+    margin: 0;
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&amp;family=Noto+Serif+SC:wght@400;500;700&amp;display=swap&amp;text=QUAERO%C2%B7TMPLIBY206%E6%A8%A1%E6%9D%BF%E5%BA%93%E5%8D%87%E7%BA%A7%E4%B8%8E%E5%AE%9E%E6%B5%8B%E9%AA%8C%E6%94%B6Gezi%2Fuaro.14%E5%86%85%E9%83%A8%E8%AF%84%E5%AE%A1%E6%9C%AC%E6%AC%A1FVS%E5%8F%AF%E8%BF%81%E7%A7%BB%E5%AF%BC%E5%87%BA%E8%AF%81%E4%BA%A4%E4%BB%98%E7%9B%AE%E6%A0%87%E4%B8%8A%E6%B8%B8%E5%90%8C%E6%AD%A5%E8%A1%A5%E9%BD%90%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83%E6%96%B0%E3%80%823%E5%90%8E%E5%85%B19%E5%A5%97kl%E5%88%86%E6%89%B9%E5%9B%9B%E4%B8%AA%E8%8D%89%E7%A8%BF%E4%BE%9D%E9%98%855%E8%BE%B9%E7%95%8C%E5%8C%BA%E5%B7%B2%E5%9B%B4%E5%BE%85%E7%8E%AF%E5%A2%83KCH%E7%AE%80%E7%9F%AD%E5%85%A5%E5%8F%A3%EF%BC%8C%E6%8C%89%E9%9C%80%E5%8F%82%E8%80%83%E6%98%8E%E7%A1%AE%E5%80%9F%E9%89%B4sd-t%E7%9A%84%E7%BB%84%E7%BB%87%E6%96%B9%E5%BC%8F%E9%A1%B9%E8%A6%81%E9%87%8D%E5%86%99%E6%8C%87%E4%BB%A4%E6%96%87%E6%A1%A3N%E7%8B%AC%E7%AB%8B%E5%8C%85mfncxph%E5%A4%8D%E5%88%B6%E6%95%B4%E5%BD%95%E5%8D%B3%E4%BD%BF%E7%94%A8%E8%B5%84%E6%BA%90%E9%9A%8F%E8%B5%B0%E8%B7%AF%E5%BE%84%E6%A0%A1%E8%BF%90%E8%A1%8C%E8%84%9A%E3%80%81%E5%93%81%E7%89%8C%E7%B4%A0%E6%9D%90%E5%92%8C%E5%9B%BE%E7%89%87%E8%BF%9B%E6%90%AC%E7%A6%BB%E4%BB%93%E6%BC%94%E7%A4%BA%E4%BB%8D%E8%83%BD%E5%8A%A0%E8%BD%BD%E7%BF%BB%E9%A1%B5%E6%B8%85%E5%8D%95%E8%AE%B0%E4%BB%B6%E5%93%88%E5%B8%8C%EF%BC%9B%E7%BC%BA%E5%A4%B1%E6%88%96%E8%B6%8A%E4%BC%9A%E8%AE%A9%E6%9E%84%E5%BB%BA%E8%B4%A5%E9%81%BF%E5%85%8D%E6%AE%8B%E7%9B%B8%E5%AF%B9X%E8%87%AA%E5%8A%A8%E6%88%90%E6%95%B0%E5%9F%BA%E7%A1%80%E5%8F%98%E4%BD%93%E6%9D%A5%EF%BC%9A%2B%3DD%E4%BA%A7%E6%8A%A5%E9%94%99%E9%80%89%E6%8B%A9%E6%80%A7%E6%B5%81%E7%A8%8B%E7%BC%A9%E4%B8%AD%E8%AF%BB%E5%8F%96W%E5%85%83%E6%8D%AE%E5%B9%B6%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9C%89%E9%80%9A%E8%BF%87%E5%89%8D%E6%80%BB7%E8%BF%9E%E7%BB%AD%E4%B8%A4%E4%B8%80%E8%87%B4%E6%A3%80%E6%9F%A5%E8%A6%86%E7%9B%96%E7%94%9F%E5%9B%9E%E5%BD%92%E8%AF%95%E9%9D%9E%E6%B3%95%26%E8%B5%96%E9%A1%BA%E5%BA%8F%E5%86%8D%E5%90%88wg%E9%99%85%E5%8F%A6%E5%81%9A%E9%80%90%E5%BE%AE%E4%BF%A1%E7%BC%96%E8%BE%91%E7%B2%98%E8%B4%B4%E6%95%88%E6%9E%9C"><style id="actual-deck-cjk">
+ :root {--serif:"Noto Serif SC","Source Serif 4",serif;--display:"LXGW WenKai TC","Noto Serif SC",serif;}
+ section h1,section h2,section h3,blockquote{font-family:var(--display)!important;font-weight:400!important;letter-spacing:0!important;line-height:1.12!important;}
+ section p {line-height:1.6!important;letter-spacing:0;}
+ .cover h1{font-size:176px;margin-top:65px;}
+ .cover .footline{bottom:132px;letter-spacing:0;font-family:var(--serif);}
+ .agenda-grid{max-height:650px;}
+ .topic h3{margin-top:12px;font-size:50px;}.topic.t-green h3{font-size:80px;}
+ .topic .foot,.statement .attrib,.data .legend,.xlabel-row,.footnote,.grid-cols h4{font-family:var(--serif)!important;letter-spacing:0!important;text-transform:none!important;}
+ .statement blockquote{font-size:128px;margin-top:20px;}
+ .statement .attrib{margin-top:28px;}.statement .attrib .name{font-size:38px;}
+ .two-col {grid-template-columns:740px 1fr;gap:80px;}
+ .two-col h2{font-size:88px;margin-bottom:32px;}.two-col p{font-size:30px;}
+ .path-title{font-family:var(--display);font-size:72px;margin-bottom:42px;}
+ .file-list{font-family:var(--mono);text-align:left;font-size:44px;line-height:1.65;}
+ .path-note{font-size:28px;line-height:1.6;margin-top:42px;}
+ .data .chart{margin-top:80px;height:510px;}.data .footnote{bottom:132px;font-size:24px;}
+ .flow{margin-top:60px;}.step{box-sizing:border-box;min-height:500px;padding:36px 28px 28px;}
+ .step h3{font-size:60px;}.step p{font-size:28px;}.step .marker{font-size:20px;letter-spacing:.04em;}
+ .stats .kpi .big{font-size:184px;letter-spacing:0;}.stats .kpi .unit{font-size:72px;}
+ .kpi-row{gap:40px;}.kpi .desc{font-size:30px;}
+ .summary h2{font-size:168px;margin-top:80px;}.summary .grid-cols{margin-top:75px;}
+ </style></head>
+<body>
+
+<!--quaero-chrome-injected-->
+<div class="qhi-header" aria-hidden="true">
+  <span class="qhi-header-title" id="qhi-header-title">QUAERO · 模板库升级</span>
+  <span class="qhi-header-page" id="qhi-header-page">01 / 01</span>
+</div>
+<div class="quaero-footer" aria-hidden="true">
+  <img class="logo-img" src="../../templates/_quaero-shared/quaero-logo.png" alt="Quaero" />
+  <span class="conf-text">QUAERO Confidential - Distribution authorized to individuals with need to know only</span>
+</div>
+
+
+
+<deck-stage aspect="1920/1080" no-rail>
+<section class="cover" data-screen-label="01 升级汇报">
+ <div class="topbar"><span class="label">QUAERO · TEMPLATE LIBRARY</span><div class="mark">2026</div></div>
+ <h1>模板库升级<br>与实测验收</h1>
+ <div class="footline"><span>GeziP / Quaero</span><span>2026.10.04 · 内部评审</span></div>
+</section>
+<section class="agenda" data-screen-label="02 汇报目录">
+ <div class="head"><h2>本次升级</h2><span class="label">FIVE AREAS</span></div>
+ <div class="agenda-grid">
+  <div class="topic t-green"><span class="num">01</span><h3>可迁移<br>可导出<br>可验证</h3><div class="foot">交付目标</div></div>
+  <div class="topic t-pink"><span class="num">02</span><h3>上游同步</h3><p>补齐设计规范与新模板。</p></div>
+  <div class="topic t-cream"><span class="num">03</span><h3>模板规模</h3><p>升级后共 69 套 Skill。</p></div>
+  <div class="topic t-greenLite"><span class="num">04</span><h3>分批交付</h3><p>四个草稿 PR 依次审阅。</p></div>
+  <div class="topic t-pink"><span class="num">05</span><h3>验收边界</h3><p>区分已测范围与待测环境。</p></div>
+ </div>
+</section>
+<section class="statement" data-screen-label="03 借鉴与取舍">
+ <span class="label">SKILL ARCHITECTURE</span>
+ <blockquote>简短入口，<br>按需参考，<br>明确验收。</blockquote>
+ <div class="attrib"><div><span class="name">借鉴 asd-ste100-skill 的组织方式</span><span>按项目需要重写指令与参考文档</span></div><span>03 / PRINCIPLES</span></div>
+</section>
+<section class="two-col" data-screen-label="04 可迁移资源包">
+ <div class="col-img"><div class="figure"><div class="path-title">独立 Skill 包</div><div class="file-list">SKILL.md<br>references/<br>assets/<br>example.html</div><div class="path-note">复制整个目录即可使用</div></div><div class="caption"><span>PORTABLE PACKAGE</span><span>01</span></div></div>
+ <div class="col-text"><span class="eyebrow">PORTABILITY</span><h2>资源随包走<br>路径可校验</h2><p>运行脚本、品牌素材和图片进入 assets。目录搬离仓库后，演示文稿仍能加载和翻页。</p><p>资源清单记录文件哈希；缺失文件或越界路径会让构建失败，避免交付残缺的 Skill。</p><dl class="meta"><div><dt>ASSETS</dt><dd>相对路径</dd></div><div><dt>EXPORT</dt><dd>独立 HTML</dd></div><div><dt>CHECK</dt><dd>自动校验</dd></div></dl></div>
+</section>
+<section class="data" data-screen-label="05 模板数量">
+ <div class="head"><div><span class="label">LIBRARY INVENTORY</span><h2>69 套模板的组成</h2></div><div class="legend"><span><i class="sw" style="background:var(--pink)"></i>模板数</span></div></div>
+ <div class="chart"><div class="yaxis"><span>40</span><span>30</span><span>20</span><span>10</span><span>0</span></div><div class="plot"><div class="grid-lines"></div><div class="bar-group"><div class="bar-pair"><div class="bar a" style="height:85%;width:140px"><span class="val">34</span></div></div></div><div class="bar-group"><div class="bar-pair"><div class="bar a" style="height:85%;width:140px"><span class="val">34</span></div></div></div><div class="bar-group"><div class="bar-pair"><div class="bar a" style="height:2.5%;width:140px"><span class="val">1</span></div></div></div></div><div class="xlabel-row"><span class="xlabel">基础模板</span><span class="xlabel">Quaero 变体</span><span class="xlabel">Institutional</span></div></div>
+ <div class="footnote"><span>来源：升级构建清单</span><span>34 + 34 + 1 = 69</span></div>
+</section>
+<section class="framework" data-screen-label="06 四批升级">
+ <div class="head"><span class="label">DELIVERY PLAN</span><span class="label">FOUR DRAFT PRS</span></div><h2>四批升级，依次审阅</h2>
+ <div class="flow">
+  <div class="step"><div class="num">PR 01</div><h3>资源包</h3><p>资源随包迁移；独立 HTML 和 PNG 导出；缺失资产明确报错。</p><div class="marker"><span>PORTABLE</span><span>01</span></div></div>
+  <div class="step pinkfill"><div class="num">PR 02</div><h3>上游同步</h3><p>选择性同步基础模板、设计规范与图库，重建品牌变体。</p><div class="marker"><span>UPSTREAM</span><span>02</span></div></div>
+  <div class="step fill"><div class="num">PR 03</div><h3>Skill 流程</h3><p>缩短入口指令；中文、品牌和验收规范按需读取。</p><div class="marker"><span>WORKFLOW</span><span>03</span></div></div>
+  <div class="step"><div class="num">PR 04</div><h3>自验证</h3><p>校验元数据、资源包和可重复构建，并加入浏览器验收。</p><div class="marker"><span>VALIDATION</span><span>04</span></div></div>
+ </div>
+</section>
+<section class="stats" data-screen-label="07 升级验证记录">
+ <div class="head"><span class="label">RECORDED CHECKS</span><span class="label">2026.10.04</span></div><h2>已有验证记录</h2>
+ <div class="kpi-row"><div class="kpi"><span class="tag">PACKAGES</span><span class="big">69<span class="unit">/69</span></span><p class="desc">独立包浏览器验收通过：加载、前后翻页和品牌总页数。</p></div><div class="kpi"><span class="tag">REPRODUCIBILITY</span><span class="big">975</span><p class="desc">连续两次构建的文件哈希一致，检查覆盖生成的交付文件。</p></div><div class="kpi"><span class="tag">REGRESSION TESTS</span><span class="big">3<span class="unit">/3</span></span><p class="desc">回归测试通过：非法元数据、可迁移资源、缺失与越界资产。</p></div></div>
+</section>
+<section class="summary" data-screen-label="08 交付与边界">
+ <div class="topbar"><span class="label">REVIEW & NEXT STEPS</span><span class="label">QUAERO</span></div><h2>交付与边界</h2>
+ <div class="grid-cols"><div><h4>01 · 审阅</h4><p>四个草稿 PR 已交付。按依赖顺序审阅后，再合入 main。</p></div><div><h4>02 · 已测</h4><p>Windows Edge 与 Linux Chromium 已运行验收。实际中文演示文稿另做逐页检查。</p></div><div><h4>03 · 待测</h4><p>Safari、Firefox 和微信编辑器粘贴效果仍需实测。</p></div></div>
+</section></deck-stage>
+
+<script src="../../runtime/export-core.js"></script>
+<script src="../../runtime/export-toolbar.js"></script>
+
+<!--quaero-chrome-injected-->
+<script>
+window.__QUAERO_CHROME__ = {};
+</script>
+<script src="../../templates/_quaero-shared/chrome.js" defer></script>
+
+</body>
+</html>

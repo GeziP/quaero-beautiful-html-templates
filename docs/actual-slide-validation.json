@@ -1,0 +1,155 @@
+{
+  "date": "2026-10-04",
+  "template": "quaero-editorial-forest",
+  "slides": [
+    {
+      "title": "01 升级汇报",
+      "index": 0,
+      "counter": "01 / 08",
+      "issues": [],
+      "brokenImages": []
+    },
+    {
+      "title": "02 汇报目录",
+      "index": 1,
+      "counter": "02 / 08",
+      "issues": [],
+      "brokenImages": []
+    },
+    {
+      "title": "03 借鉴与取舍",
+      "index": 2,
+      "counter": "03 / 08",
+      "issues": [],
+      "brokenImages": []
+    },
+    {
+      "title": "04 可迁移资源包",
+      "index": 3,
+      "counter": "04 / 08",
+      "issues": [],
+      "brokenImages": []
+    },
+    {
+      "title": "05 模板数量",
+      "index": 4,
+      "counter": "05 / 08",
+      "issues": [],
+      "brokenImages": []
+    },
+    {
+      "title": "06 四批升级",
+      "index": 5,
+      "counter": "06 / 08",
+      "issues": [],
+      "brokenImages": []
+    },
+    {
+      "title": "07 升级验证记录",
+      "index": 6,
+      "counter": "07 / 08",
+      "issues": [],
+      "brokenImages": []
+    },
+    {
+      "title": "08 交付与边界",
+      "index": 7,
+      "counter": "08 / 08",
+      "issues": [],
+      "brokenImages": []
+    }
+  ],
+  "errors": [],
+  "offline": [
+    {
+      "slide": 1,
+      "pngBytes": 510148,
+      "width": 3840,
+      "height": 2160,
+      "transparent": 0
+    },
+    {
+      "slide": 2,
+      "pngBytes": 510980,
+      "width": 3840,
+      "height": 2160,
+      "transparent": 0
+    },
+    {
+      "slide": 3,
+      "pngBytes": 502035,
+      "width": 3840,
+      "height": 2160,
+      "transparent": 0
+    },
+    {
+      "slide": 4,
+      "pngBytes": 653631,
+      "width": 3840,
+      "height": 2160,
+      "transparent": 0
+    },
+    {
+      "slide": 5,
+      "pngBytes": 394267,
+      "width": 3840,
+      "height": 2160,
+      "transparent": 0
+    },
+    {
+      "slide": 6,
+      "pngBytes": 632097,
+      "width": 3840,
+      "height": 2160,
+      "transparent": 0
+    },
+    {
+      "slide": 7,
+      "pngBytes": 511952,
+      "width": 3840,
+      "height": 2160,
+      "transparent": 0
+    },
+    {
+      "slide": 8,
+      "pngBytes": 529231,
+      "width": 3840,
+      "height": 2160,
+      "transparent": 0
+    }
+  ],
+  "actualCoverFonts": [
+    {
+      "familyName": "LXGW WenKai TC",
+      "postScriptName": "LXGWWenKaiTC-Regular",
+      "isCustomFont": true,
+      "glyphCount": 10
+    }
+  ],
+  "actualBodyFonts": [
+    {
+      "familyName": "Noto Serif SC ExtraLight",
+      "postScriptName": "Noto-Serif-SC-ExtraLight",
+      "isCustomFont": true,
+      "glyphCount": 41
+    },
+    {
+      "familyName": "Source Serif 4",
+      "postScriptName": "Source-Serif-4-28pt",
+      "isCustomFont": true,
+      "glyphCount": 1
+    }
+  ],
+  "standaloneBytes": 23529913,
+  "offlineCoverFonts": [
+    {
+      "familyName": "LXGW WenKai TC",
+      "postScriptName": "LXGWWenKaiTC-Regular",
+      "isCustomFont": true,
+      "glyphCount": 10
+    }
+  ],
+  "offlineBackIndex": 6,
+  "passed": true,
+  "visualReview": "All eight browser slides and eight exported PNG slides inspected; no clipping or missing content observed."
+}
