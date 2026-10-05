@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-04",
+  "date": "2026-10-05",
   "template": "quaero-editorial-forest",
   "slides": [
     {
@@ -63,56 +63,56 @@
   "offline": [
     {
       "slide": 1,
-      "pngBytes": 510148,
+      "pngBytes": 510049,
       "width": 3840,
       "height": 2160,
       "transparent": 0
     },
     {
       "slide": 2,
-      "pngBytes": 510980,
+      "pngBytes": 510667,
       "width": 3840,
       "height": 2160,
       "transparent": 0
     },
     {
       "slide": 3,
-      "pngBytes": 502035,
+      "pngBytes": 501651,
       "width": 3840,
       "height": 2160,
       "transparent": 0
     },
     {
       "slide": 4,
-      "pngBytes": 653631,
+      "pngBytes": 652641,
       "width": 3840,
       "height": 2160,
       "transparent": 0
     },
     {
       "slide": 5,
-      "pngBytes": 394267,
+      "pngBytes": 402947,
       "width": 3840,
       "height": 2160,
       "transparent": 0
     },
     {
       "slide": 6,
-      "pngBytes": 632097,
+      "pngBytes": 624230,
       "width": 3840,
       "height": 2160,
       "transparent": 0
     },
     {
       "slide": 7,
-      "pngBytes": 511952,
+      "pngBytes": 512135,
       "width": 3840,
       "height": 2160,
       "transparent": 0
     },
     {
       "slide": 8,
-      "pngBytes": 529231,
+      "pngBytes": 528645,
       "width": 3840,
       "height": 2160,
       "transparent": 0
@@ -140,7 +140,15 @@
       "glyphCount": 1
     }
   ],
-  "standaloneBytes": 23529913,
+  "newCopyFonts": [
+    {
+      "familyName": "Noto Serif SC ExtraLight",
+      "postScriptName": "Noto-Serif-SC-ExtraLight",
+      "isCustomFont": true,
+      "glyphCount": 24
+    }
+  ],
+  "standaloneBytes": 23536823,
   "offlineCoverFonts": [
     {
       "familyName": "LXGW WenKai TC",
@@ -151,5 +159,5 @@
   ],
   "offlineBackIndex": 6,
   "passed": true,
-  "visualReview": "All eight browser slides and eight exported PNG slides inspected; no clipping or missing content observed."
+  "visualReview": "Reviewed the eight-slide contact sheet and detailed chart, flow and letterboxed views before and after correction."
 }

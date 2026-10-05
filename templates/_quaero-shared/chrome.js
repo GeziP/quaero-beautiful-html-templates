@@ -35,10 +35,59 @@
     });
   }
 
-  function computeSafeInsets() {
-    const extraTop = typeof cfg.safeTopExtraPx === "number" ? cfg.safeTopExtraPx : 8;
+  function alignStageChrome(reference) {
+    const stage = document.querySelector("deck-stage");
+    if (!stage || !reference) return 1;
+    const canvas = stage.shadowRoot && stage.shadowRoot.querySelector(".canvas");
+    const rect = (canvas || reference).getBoundingClientRect();
+    const scale = rect.width / reference.offsetWidth;
+    if (!scale || !rect.height) return 1;
+    function stageLength(value, fallback) {
+      if (typeof value !== "string") return fallback;
+      const n = parseFloat(value);
+      if (!Number.isFinite(n)) return fallback;
+      if (value.endsWith("vh")) return n * rect.height / 100;
+      if (value.endsWith("vw")) return n * rect.width / 100;
+      if (value.endsWith("px")) return n * 1.5 * scale;
+      return fallback;
+    }
+    // Keep chrome on the slide, including when the stage is letterboxed.
+    // The previous viewport-fixed frame drifted from the content on resize.
+    const frame = typeof cfg.stageFramePx === "number" ? cfg.stageFramePx * scale : stageLength(cfg.frameX, 120 * scale);
+    const inner = stageLength(cfg.frameInnerX, 18 * scale);
+    [headerEl, footerEl].forEach(function (el) {
+      if (!el) return;
+      el.style.left = `${rect.left + frame}px`;
+      el.style.right = `${window.innerWidth - rect.right + frame}px`;
+      el.style.paddingLeft = el.style.paddingRight = `${inner}px`;
+      el.style.boxSizing = "border-box";
+      el.style.minHeight = "0";
+    });
+    if (headerEl) {
+      headerEl.style.top = `${rect.top + stageLength(cfg.chromeTop, rect.height * 0.016)}px`;
+      headerEl.style.height = `${stageLength(cfg.chromeHeaderHeight, rect.height * 0.054)}px`;
+    }
+    if (footerEl) {
+      footerEl.style.bottom = `${window.innerHeight - rect.bottom + stageLength(cfg.chromeBottom, 0)}px`;
+      footerEl.style.height = `${stageLength(cfg.chromeFooterHeight, rect.height * 0.08)}px`;
+      const logo = footerEl.querySelector(".logo-img");
+      const text = footerEl.querySelector(".conf-text");
+      if (logo) {
+        logo.style.height = `${rect.height * 0.05}px`;
+        logo.style.minHeight = "0";
+        logo.style.marginRight = `${28.8 * scale}px`;
+      }
+      if (text) text.style.fontSize = `${17.5 * scale}px`;
+    }
+    if (headerTitle) headerTitle.style.fontSize = `${22 * scale}px`;
+    if (headerPage) headerPage.style.fontSize = `${18 * scale}px`;
+    return scale;
+  }
+
+  function computeSafeInsets(extraScale = 1) {
+    const extraTop = (typeof cfg.safeTopExtraPx === "number" ? cfg.safeTopExtraPx : 8) * extraScale;
     const extraBottom =
-      typeof cfg.safeBottomExtraPx === "number" ? cfg.safeBottomExtraPx : 8;
+      (typeof cfg.safeBottomExtraPx === "number" ? cfg.safeBottomExtraPx : 8) * extraScale;
     const headerRect = headerEl
       ? headerEl.getBoundingClientRect()
       : { bottom: 0 };
@@ -55,9 +104,10 @@
   }
 
   function applySafeAreaToSlides(slides) {
-    const insets = computeSafeInsets();
     const stage = document.querySelector("deck-stage");
     const reference = stage && (stage.querySelector("[data-deck-active]") || slides[0]);
+    const chromeScale = alignStageChrome(reference);
+    const insets = computeSafeInsets(stage ? chromeScale * 1.5 : 1);
     const rect = reference ? reference.getBoundingClientRect() : null;
     const scale = rect && reference.offsetHeight ? rect.height / reference.offsetHeight : 1;
     // deck-stage renders a native canvas under a viewport scale. Chrome is in

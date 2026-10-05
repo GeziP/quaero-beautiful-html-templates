@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-05",
+  "browser": "Microsoft Edge",
+  "slides": 8,
+  "viewports": [
+    {
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "width": 1024,
+      "height": 768
+    }
+  ],
+  "checks": 32,
+  "safeAreaIssues": 0,
+  "visualReview": "Reviewed the eight-slide contact sheet and detailed chart, flow and letterboxed views before and after correction.",
+  "fullLibraryRegression": "69/69 relocated packages passed; final focused Editorial Forest regression also passed.",
+  "comparisons": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "before": {
+        "barLabelMaxErrorPx": 6.8802490234375,
+        "tickGridMaxErrorPx": 11.666671752929688,
+        "footerOutsideCanvasPx": 0
+      },
+      "after": {
+        "barLabelMaxErrorPx": 0.005218505859375,
+        "tickGridMaxErrorPx": 2.0345052007542108e-05,
+        "footerOutsideCanvasPx": 0
+      }
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "before": {
+        "barLabelMaxErrorPx": 10.3203125,
+        "tickGridMaxErrorPx": 17.5,
+        "footerOutsideCanvasPx": 0
+      },
+      "after": {
+        "barLabelMaxErrorPx": 0.0078125,
+        "tickGridMaxErrorPx": 0.0,
+        "footerOutsideCanvasPx": 0
+      }
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "before": {
+        "barLabelMaxErrorPx": 7.740234375,
+        "tickGridMaxErrorPx": 13.125,
+        "footerOutsideCanvasPx": 45
+      },
+      "after": {
+        "barLabelMaxErrorPx": 0.005859375,
+        "tickGridMaxErrorPx": 0.0,
+        "footerOutsideCanvasPx": 0
+      }
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "before": {
+        "barLabelMaxErrorPx": 5.504150390625,
+        "tickGridMaxErrorPx": 9.333343505859375,
+        "footerOutsideCanvasPx": 96
+      },
+      "after": {
+        "barLabelMaxErrorPx": 0.004180908203125,
+        "tickGridMaxErrorPx": 2.7465820323868684e-05,
+        "footerOutsideCanvasPx": 0
+      }
+    }
+  ]
+}

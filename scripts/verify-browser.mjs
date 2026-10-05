@@ -72,6 +72,24 @@ try {
         if (meta.slug.startsWith('quaero-')) {
           const pageLabel = await page.locator('#qhi-header-page').textContent();
           assert.ok(pageLabel.includes(String(meta.slide_count).padStart(2, '0')), 'Quaero total counter');
+          const stageChrome = await page.evaluate(() => !!document.querySelector('deck-stage') && !!document.querySelector('script[src*="_quaero-shared/chrome.js"]'));
+          if (stageChrome) {
+            for (const viewport of [{width:1920,height:1080},{width:1440,height:900},{width:1024,height:768}]) {
+              await page.setViewportSize(viewport);
+              await page.waitForTimeout(150);
+              const geometry = await page.evaluate(() => {
+                const slide=QuaeroExport.currentSlide(),r=slide.getBoundingClientRect();
+                const h=document.querySelector('.qhi-header').getBoundingClientRect(),f=document.querySelector('.quaero-footer').getBoundingClientRect();
+                const scale=r.width/slide.offsetWidth;
+                return {contained:h.top>=r.top-1&&h.bottom<=r.bottom+1&&f.top>=r.top-1&&f.bottom<=r.bottom+1,
+                  footerError:Math.abs(f.bottom-r.bottom),frameError:Math.abs((h.left-r.left)/scale-120),
+                  aligned:Math.abs(h.left-f.left)<1&&Math.abs(h.right-f.right)<1};
+              });
+              assert.ok(geometry.contained && geometry.footerError<1 && geometry.frameError<1 && geometry.aligned, `${meta.slug}: chrome follows native canvas at ${viewport.width}x${viewport.height}`);
+            }
+            await page.setViewportSize({width:1280,height:720});
+            await page.waitForTimeout(150);
+          }
         }
         if (representatives.has(meta.slug)) {
           await page.screenshot({ path: join(artifacts, `${meta.slug}-cover.png`) });
